@@ -50,6 +50,10 @@ Este projeto é uma aplicação full-stack que consiste em um frontend Vue.js e 
 
 O backend estará rodando em `http://127.0.0.1:8000`.
 
+## Configuração do Backend (Laravel)
+
+[... manter as instruções anteriores ...]
+
 ## Configuração do Frontend (Vue.js)
 
 1. Navegue até o diretório principal do projeto Vue.js:
@@ -62,12 +66,33 @@ O backend estará rodando em `http://127.0.0.1:8000`.
    npm install
    ```
 
-3. Compile e hot-reload para desenvolvimento:
+3. Instale as dependências adicionais:
+   ```
+   npm install vue-router@4 vuex@4 axios chart.js@3 vuetify@3
+   ```
+
+4. Compile e hot-reload para desenvolvimento:
    ```
    npm run serve
    ```
 
 O frontend estará disponível em `http://localhost:8080`.
+
+## Dependências Principais
+
+### Backend (Laravel)
+- Laravel Framework 11.25.0
+- [Outras dependências do Laravel, se houver]
+
+### Frontend (Vue.js)
+- Vue.js 3.x
+- Vue Router 4.x
+- Vuex 4.x
+- Axios
+- Chart.js 3.x
+- Vuetify 3.x
+
+Certifique-se de verificar o arquivo `package.json` para a lista completa de dependências e suas versões exatas.
 
 ## Uso
 
