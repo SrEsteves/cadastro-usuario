@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserListController;
+use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/users', [UserListController::class, 'index'])->name('users.index');
+Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
