@@ -41,7 +41,6 @@
           </v-card-text>
         </v-card>
         
-        <!-- Adicione o v-alert aqui -->
         <v-alert v-if="errorMessage" type="error" class="mt-4">
           {{ errorMessage }}
         </v-alert>
@@ -75,7 +74,7 @@ export default {
       confirmarSenha: "",
       mostrarModal: false,
       valid: false,
-      errorMessage: "", // Adicionado para mostrar mensagens de erro
+      
       rules: {
         required: (value) => !!value || "Campo obrigatório.",
         email: (value) => /.+@.+\..+/.test(value) || "E-mail inválido.",
@@ -95,17 +94,17 @@ export default {
           });
           console.log(response.data);
           this.mostrarModal = true;
-          this.errorMessage = ""; // Limpa qualquer mensagem de erro anterior
+          this.errorMessage = "";
         } catch (error) {
           console.error('Erro ao cadastrar:', error);
           if (error.response) {
-            // O servidor respondeu com um status de erro
+            
             this.errorMessage = error.response.data.message || "Erro ao cadastrar usuário.";
           } else if (error.request) {
-            // A requisição foi feita mas não houve resposta
+            
             this.errorMessage = "Não foi possível conectar ao servidor.";
           } else {
-            // Algo aconteceu ao configurar a requisição que acionou um erro
+            
             this.errorMessage = "Erro ao processar a requisição.";
           }
         }
