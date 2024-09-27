@@ -92,7 +92,7 @@ O projeto utiliza SQLite como banco de dados. O arquivo do banco de dados deve e
 
 - Laravel: 11.25.0
 - PHP: 8.2.23
-- Vue.js: [Especifique a versão do Vue.js]
+- Vue.js: 3.2.13
 
 ## Comandos Úteis
 
