@@ -50,9 +50,6 @@ Este projeto é uma aplicação full-stack que consiste em um frontend Vue.js e 
 
 O backend estará rodando em `http://127.0.0.1:8000`.
 
-## Configuração do Backend (Laravel)
-
-[... manter as instruções anteriores ...]
 
 ## Configuração do Frontend (Vue.js)
 
