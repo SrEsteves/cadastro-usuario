@@ -1,33 +1,36 @@
 <template>
-  <v-container>
+  <v-container fluid class="dashboard-container">
     <v-row justify="center">
-      <v-col cols="12" md="8">
-        <v-card>
-          <v-card-title class="headline">Dashboard</v-card-title>
+      <v-col cols="12" md="10">
+        <h1 class="text-h3 mb-6 text-center">Dashboard de Usuários</h1>
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-card class="mx-auto" elevation="2">
+              <v-card-text class="d-flex align-center">
+                <v-icon size="48" color="primary" class="mr-4">mdi-account-group</v-icon>
+                <div>
+                  <div class="text-h6">Total de Usuários</div>
+                  <div class="text-h4">{{ totalUsers }}</div>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-card class="mx-auto" elevation="2">
+              <v-card-text class="d-flex align-center">
+                <v-icon size="48" color="success" class="mr-4">mdi-account-plus</v-icon>
+                <div>
+                  <div class="text-h6">Usuários Criados Hoje</div>
+                  <div class="text-h4">{{ usersCreatedToday }}</div>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-card outlined class="mt-6" elevation="2">
+          <v-card-title>Novos Usuários nos Últimos 3 Meses</v-card-title>
           <v-card-text>
-            <v-row>
-              <v-col cols="12" sm="6">
-                <v-card outlined>
-                  <v-card-title>Total de Usuários</v-card-title>
-                  <v-card-text class="display-1 text-center">
-                    {{ totalUsers }}
-                  </v-card-text>
-                </v-card>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-card outlined>
-                  <v-card-title>Usuários Criados Hoje</v-card-title>
-                  <v-card-text class="display-1 text-center">
-                    {{ usersCreatedToday }}
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-            <v-data-table
-              :headers="headers"
-              :items="recentUsers"
-              class="mt-4"
-            ></v-data-table>
+            <canvas ref="chartCanvas"></canvas>
           </v-card-text>
         </v-card>
       </v-col>
@@ -36,35 +39,69 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Chart from 'chart.js/auto';
+
 export default {
   name: 'HomeView',
   data() {
     return {
       totalUsers: 0,
       usersCreatedToday: 0,
-      headers: [
-        { text: 'Nome', value: 'name' },
-        { text: 'E-mail', value: 'email' },
-        { text: 'Data de Criação', value: 'created_at' },
-      ],
-      recentUsers: [],
+      chart: null,
     };
   },
   mounted() {
-    // Aqui você fará uma chamada à API para obter os dados reais
     this.fetchDashboardData();
   },
   methods: {
     async fetchDashboardData() {
-
-      this.totalUsers = 100;
-      this.usersCreatedToday = 5;
-      this.recentUsers = [
-        { name: 'João Silva', email: 'joao@example.com', created_at: '2023-09-26' },
-        { name: 'Maria Santos', email: 'maria@example.com', created_at: '2023-09-25' },
-        
-      ];
+      try {
+        const response = await axios.get('/api/dashboard');
+        const data = response.data;
+        this.totalUsers = data.totalUsers;
+        this.usersCreatedToday = data.usersCreatedToday;
+        this.createChart(data.lastThreeMonths);
+      } catch (error) {
+        console.error('Erro ao buscar dados do dashboard:', error);
+      }
     },
+    createChart(lastThreeMonths) {
+      const ctx = this.$refs.chartCanvas.getContext('2d');
+      if (this.chart) {
+        this.chart.destroy();
+      }
+      this.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: lastThreeMonths.map(item => item.month),
+          datasets: [{
+            label: 'Novos Usuários',
+            data: lastThreeMonths.map(item => item.count),
+            borderColor: '#4CAF50',
+            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+            tension: 0.1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
   },
 };
 </script>
+
+<style scoped>
+.dashboard-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+</style>

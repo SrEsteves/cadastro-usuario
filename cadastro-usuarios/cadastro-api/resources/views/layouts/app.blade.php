@@ -45,6 +45,7 @@
             }
         }
     </style>
+    @yield('styles')
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
