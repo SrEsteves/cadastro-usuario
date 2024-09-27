@@ -29,14 +29,12 @@ class UserRegistrationTest extends TestCase
 
     public function test_user_cannot_register_with_existing_email()
     {
-        // Primeiro, crie um usuário
         $this->postJson('/api/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'password123',
         ]);
 
-        // Tente registrar outro usuário com o mesmo email
         $response = $this->postJson('/api/register', [
             'name' => 'Another User',
             'email' => 'test@example.com',
