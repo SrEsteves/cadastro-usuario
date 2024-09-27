@@ -138,3 +138,23 @@ O projeto utiliza SQLite como banco de dados. O arquivo do banco de dados deve e
 - Certifique-se de que o PHP e o Composer estão instalados e configurados corretamente em seu sistema.
 - Verifique se o Node.js e o npm estão instalados para o desenvolvimento frontend.
 - Para um ambiente de produção, considere usar um servidor web como Nginx ou Apache.
+- 
+## Bibliotecas Principais
+
+Este projeto utiliza várias bibliotecas importantes para melhorar a funcionalidade e a experiência do usuário:
+
+- **Vue.js**: Framework JavaScript progressivo para construir interfaces de usuário.
+- **Vue Router**: Roteamento oficial para aplicações Vue.js.
+- **Vuex**: Gerenciamento de estado para Vue.js.
+- **Axios**: Cliente HTTP baseado em promessas para fazer requisições à API.
+- **Chart.js**: Biblioteca JavaScript para criação de gráficos.
+- **Vuetify**: Framework de componentes UI para Vue.js.
+
+Cada uma dessas bibliotecas desempenha um papel crucial no funcionamento da aplicação:
+
+- Vue Router gerencia a navegação entre diferentes páginas/componentes.
+- Vuex é usado para gerenciar o estado global da aplicação.
+- Axios é utilizado para fazer chamadas à API do backend.
+- Chart.js é usado para renderizar o gráfico no dashboard.
+- Vuetify fornece componentes UI pré-estilizados e responsivos.
+
